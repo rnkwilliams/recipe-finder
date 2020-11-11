@@ -25,9 +25,9 @@ function searchRecipe(e) {
           resultHeading.innerHTML = `<p>There are no search results. Try again!</p>`;
         } else {
           recipesEl.innerHTML = data.meals.map(meal => `
-            <div class="recipes">
+            <div class="recipe">
               <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
-              <div class="meal-info" data-mealID="${meal.idMeal}" >
+              <div class="recipe-info" data-mealID="${meal.idMeal}" >
                 <h3>${meal.strMeal}</h3>
               </div>
             </div>
