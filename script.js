@@ -6,10 +6,6 @@ const resultHeading = document.getElementById('result-heading');
 const single_recipeEl = document.getElementById('single-recipe');
 
 
-submit.addEventListener('submit', searchRecipe);
-
-
-
 function searchRecipe(e) {
   e.preventDefault();
   single_recipeEl.innerHTML = '';
@@ -40,3 +36,36 @@ function searchRecipe(e) {
     alert('Please enter a search term');
   }
 }
+
+function getRecipeById(recipeID) {
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`)
+    .then(res => res.json())
+    .then(data => {
+      const recipe = data.meals[0];
+
+      addMealToDOM(recipe);
+    });
+}
+
+
+
+
+
+
+//EVENT LISTENERS
+submit.addEventListener('submit', searchRecipe);
+
+recipesEl.addEventListener('click', e => {
+  const recipeInfo = e.path.find(item => {
+    if (item.classList) {
+      return item.classList.contains('recipe-info');
+    } else {
+      return false;
+    };
+  })
+
+  if (recipeInfo) {
+    const recipeID = recipeInfo.getAttribute('data-mealid');
+    getRecipeById(recipeID);
+  }
+})
