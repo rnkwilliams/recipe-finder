@@ -47,6 +47,19 @@ function getRecipeById(recipeID) {
     });
 }
 
+function getRandomRecipe() {
+  recipesEl.innerHTML = '';
+  resultHeading.innerHTML = '';
+
+  fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+    .then(res => res.json())
+    .then(data => {
+      const recipe = data.meals[0];
+
+      addMealToDOM(recipe);
+    })
+}
+
 function addMealToDOM(recipe) {
   const ingredients = [];
 
@@ -79,10 +92,9 @@ function addMealToDOM(recipe) {
 }
 
 
-
-
 //EVENT LISTENERS
 submit.addEventListener('submit', searchRecipe);
+random.addEventListener('click', getRandomRecipe);
 
 recipesEl.addEventListener('click', e => {
   const recipeInfo = e.path.find(item => {
