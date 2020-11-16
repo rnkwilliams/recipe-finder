@@ -47,7 +47,36 @@ function getRecipeById(recipeID) {
     });
 }
 
+function addMealToDOM(recipe) {
+  const ingredients = [];
 
+  for (let i = 1; i <= 20; i++) {
+    if (recipe[`strIngredient${i}`]) {
+      ingredients.push(`${recipe[`strIngredient${i}`]} - ${recipe[`strMeasure${i}`]}`
+      );
+    } else {
+      break;
+    }
+  }
+
+  single_recipeEl.innerHTML = `
+  <div class="single-recipe">
+    <h1>${recipe.strMeal}</h1>
+    <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" />
+    <div class="single-recipe-info">
+      ${recipe.strCategory ? `<p>${recipe.strCategory}</p>` : ''}
+      ${recipe.strArea ? `<p>${recipe.strArea}</p>` : ''}
+    </div>
+    <div class="main">
+      <p>${recipe.strInstructions}</p>
+      <h2>Ingredients</h2>
+      <ul>
+        ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+      </ul>
+    </div>
+  </div>
+  `;
+}
 
 
 
