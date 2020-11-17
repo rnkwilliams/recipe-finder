@@ -81,11 +81,12 @@ function addMealToDOM(recipe) {
       ${recipe.strArea ? `<p>${recipe.strArea}</p>` : ''}
     </div>
     <div class="main">
-      <p>${recipe.strInstructions}</p>
-      <h2>Ingredients</h2>
+    <h2>Ingredients</h2>
       <ul>
         ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
       </ul>
+      <h2>Instructions</h2>
+      <p>${recipe.strInstructions}</p> 
     </div>
   </div>
   `;
